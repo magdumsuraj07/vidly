@@ -6,6 +6,7 @@ import ListGroup from "./common/listGroup";
 import { getGenres } from "../services/fakeGenreService";
 import MoviesTable from "./moviesTable";
 import _, { filter } from "lodash";
+import NavBar from "./navBar";
 
 class Movies extends Component {
   state = {
@@ -77,31 +78,33 @@ class Movies extends Component {
     const { totalCount, data: movies } = this.getPagedData();
 
     return (
-      <div className="row">
-        <div className="col-3">
-          <ListGroup
-            items={this.state.genres}
-            selectedItem={this.state.selectedGenre}
-            textProperty="name"
-            valueProperty="_id"
-            onItemSelect={this.handleGenreSelect}
-          />
-        </div>
-        <div className="col">
-          <p>Showing {totalCount} movies in the database.</p>
-          <MoviesTable
-            movies={movies}
-            sortColumn={sortColumn}
-            onLike={this.handleLike}
-            onDelete={this.handleDelete}
-            onSort={this.handleSort}
-          />
-          <Pagination
-            itemsCount={totalCount}
-            pageSize={pageSize}
-            currentPage={currentPage}
-            onPageChange={this.handlePageChange}
-          />
+      <div className="container">
+        <div className="row">
+          <div className="col-3">
+            <ListGroup
+              items={this.state.genres}
+              selectedItem={this.state.selectedGenre}
+              textProperty="name"
+              valueProperty="_id"
+              onItemSelect={this.handleGenreSelect}
+            />
+          </div>
+          <div className="col">
+            <p>Showing {totalCount} movies in the database.</p>
+            <MoviesTable
+              movies={movies}
+              sortColumn={sortColumn}
+              onLike={this.handleLike}
+              onDelete={this.handleDelete}
+              onSort={this.handleSort}
+            />
+            <Pagination
+              itemsCount={totalCount}
+              pageSize={pageSize}
+              currentPage={currentPage}
+              onPageChange={this.handlePageChange}
+            />
+          </div>
         </div>
       </div>
     );
